@@ -19,13 +19,27 @@ public class TEst : MonoBehaviour
 		PrintArray(numbers);
 	}
 
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			ResetNum();
+		}
+	}
+
+	void ResetNum()
+	{
+		numbers = GenerateNumberArray();
+		ShuffleArray(numbers);
+		PrintArray(numbers);
+	}
+
 	int[] GenerateNumberArray()
 	{
 		int[] result = new int[rows * cols];
 		int sum = 0;
 		int index = 0;
 
-		// Initial distribution
 		for (int i = 1; i <= 9; i++)
 		{
 			for (int j = 0; j < 15; j++)
@@ -35,7 +49,6 @@ public class TEst : MonoBehaviour
 			}
 		}
 
-		// Adjust distribution to match targetSum
 		while (sum != targetSum)
 		{
 			for (int i = 0; i < result.Length && sum != targetSum; i++)
@@ -77,7 +90,7 @@ public class TEst : MonoBehaviour
 			{
 				row += array[i * cols + j] + " ";
 			}
-			txt.text += "\n";
+			txt.text += row + "\n";
 			Debug.Log(row);
 		}
 	}
